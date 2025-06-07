@@ -2,9 +2,10 @@
 
 import BorderArrow from "@/components/border-arrow";
 import { UI } from "@/components/client-components";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { chatbotApplications, chatbotButtons } from "@/libs/data";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
-
+import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 
@@ -48,6 +49,33 @@ const services = [
     icon: Icons.Building,
   },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const fadeInVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.8 } },
+};
+
 export default function HomePage() {
   return (
     <>
@@ -60,24 +88,41 @@ export default function HomePage() {
 
         {/* Content Container */}
         <div className="relative z-10 container mx-auto px-4 py-20 mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          >
             {/* Left Content */}
-            <div className="text-white space-y-8 max-w-xl my-auto">
+            <motion.div
+              variants={itemVariants}
+              className="text-white space-y-8 max-w-xl my-auto"
+            >
               <div className="space-y-4">
-                <p className="text-base sm:text-lg text-shadow">
+                <motion.p
+                  variants={itemVariants}
+                  className="text-base sm:text-lg text-shadow"
+                >
                   Huấn luyện AI dành cho Tổ chức & Doanh nghiệp
-                </p>
-                <h1 className=" text-5xl lg:text-7xl font-bold leading-tight text-shadow">
+                </motion.p>
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-5xl lg:text-7xl font-bold leading-tight text-shadow"
+                >
                   Huấn luyện AI
                   <br />
                   với Dữ liệu
                   <br />
                   Doanh nghiệp
-                </h1>
+                </motion.h1>
               </div>
 
               {/* Form (Hiện mọi thiết bị) */}
-              <div className="space-y-4 w-full hidden sm:block">
+              <motion.div
+                variants={itemVariants}
+                className="space-y-4 w-full hidden sm:block"
+              >
                 <div className="relative w-full">
                   <div>
                     <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -88,28 +133,57 @@ export default function HomePage() {
                     />
                   </div>
                 </div>
-                <button className="w-full sm:w-fit bg-[#0f09aa] hover:bg-[#40372c] text-white font-bold px-8 py-3.5 h-12 rounded-full text-lg cursor-pointer">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-fit bg-[#0f09aa] hover:bg-[#40372c] text-white font-bold px-8 py-3.5 h-12 rounded-full text-lg cursor-pointer"
+                >
                   Tôi cần tư vấn
-                </button>
-              </div>
-            </div>
+                </motion.button>
+              </motion.div>
+            </motion.div>
 
             {/* Right Illustration Placeholder */}
-            <div className="h-[300px] sm:h-[400px] lg:h-[500px] relative hidden lg:block">
+            <motion.div
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="h-[300px] sm:h-[400px] lg:h-[500px] relative hidden lg:block"
+            >
               {/* Đặt hình ảnh hoặc mô hình minh hoạ ở đây nếu có */}
-              <div className="w-full h-full " />
-            </div>
-          </div>
+              <div className="w-full h-full" />
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Floating Circle (chỉ desktop) */}
-        <div className="hidden lg:flex absolute bottom-10 left-10 w-12 h-12 bg-white/10 rounded-full items-center justify-center">
+        <motion.div
+          animate={{
+            y: [0, -10, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="hidden lg:flex absolute bottom-10 left-10 w-12 h-12 bg-white/10 rounded-full items-center justify-center"
+        >
           <div className="w-6 h-6 bg-orange-400 rounded-full" />
-        </div>
+        </motion.div>
       </section>
-      <section className="container mx-auto  mt-12">
-        <div className=" grid grid-cols-1 lg:grid-cols-2 gap-10 ">
-          <div className="flex bg-[#112c6f] text-white p-8 rounded-3xl space-x-8">
+
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInVariants}
+        viewport={{ once: true }}
+        className="container mx-auto mt-12"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <motion.div
+            variants={itemVariants}
+            className="flex bg-[#112c6f] text-white p-8 rounded-3xl space-x-8"
+          >
             <div>
               <FontAwesomeIcon
                 icon={faGraduationCap}
@@ -119,8 +193,8 @@ export default function HomePage() {
               />
             </div>
             <div>
-              <h3 className="text-xl text-[#a1c8e6] ">Huấn luyện AI là gì?</h3>
-              <p className=" text-left text-lg mt-4   ">
+              <h3 className="text-xl text-[#a1c8e6]">Huấn luyện AI là gì?</h3>
+              <p className="text-left text-lg mt-4">
                 Huấn luyện AI, còn được gọi là học máy, là quá trình dạy cho máy
                 tính cách tìm hiểu từ dữ liệu và kiến thức. Quá trình này bao
                 gồm việc xử lý, cung cấp dữ liệu đầu vào cho máy tính phù hợp và
@@ -128,8 +202,11 @@ export default function HomePage() {
                 suất đáp ứng yêu cầu thực tế.
               </p>
             </div>
-          </div>
-          <div className="flex bg-[#112c6f] text-white p-8 rounded-3xl space-x-8">
+          </motion.div>
+          <motion.div
+            variants={itemVariants}
+            className="flex bg-[#112c6f] text-white p-8 rounded-3xl space-x-8"
+          >
             <div>
               <Image
                 src="/think-big.png"
@@ -140,8 +217,8 @@ export default function HomePage() {
               />
             </div>
             <div>
-              <h3 className="text-xl text-[#a1c8e6] ">MYGPT cung cấp</h3>
-              <div className="text-left text-lg mt-4 ">
+              <h3 className="text-xl text-[#a1c8e6]">MYGPT cung cấp</h3>
+              <div className="text-left text-lg mt-4">
                 <p>Dịch vụ huấn luyện AI bao gồm:</p>
                 <p>
                   ⇾{" "}
@@ -160,48 +237,80 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
         <BorderArrow />
-      </section>
+      </motion.section>
 
-      <section>
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+      >
         <div className="text-center">
-          <p className="text-base font-semibold">
+          <motion.p variants={itemVariants} className="text-base font-semibold">
             MyGPT có thể triển khai trong
-          </p>
-          <p className="font-bold text-4xl mt-6 mb-10"> Các lĩnh vực</p>
+          </motion.p>
+          <motion.p
+            variants={itemVariants}
+            className="font-bold text-4xl mt-6 mb-10"
+          >
+            Các lĩnh vực
+          </motion.p>
         </div>
         <div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            variants={containerVariants}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          >
             {services.map((service) => (
-              <Card
+              <motion.div
                 key={service.title}
-                className="text-center hover:shadow-lg transition-shadow border-none w-[80%] mx-auto  lg:w-full"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <service.icon className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="font-bold mb-2 text-2xl">{service.title}</h3>
-                  <p className="text-lg text-gray-600">{service.description}</p>
-                </CardContent>
-              </Card>
+                <Card className="text-center hover:shadow-lg transition-shadow border-none w-[80%] mx-auto lg:w-full">
+                  <CardContent className="p-6">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <service.icon className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <h3 className="font-bold mb-2 text-2xl">{service.title}</h3>
+                    <p className="text-lg text-gray-600">
+                      {service.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
         <BorderArrow />
-      </section>
+      </motion.section>
 
-      <section className="max-w-[1140px] mx-auto my-20  ">
-        <h2 className="text-center text-green-700 text-3xl font-semibold mb-12">
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        viewport={{ once: true }}
+        className="max-w-[1140px] mx-auto my-20"
+      >
+        <motion.h2
+          variants={itemVariants}
+          className="text-center text-green-700 text-3xl font-semibold mb-12"
+        >
           Một số ứng dụng đã triển khai
-        </h2>
+        </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+        <motion.div
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto"
+        >
           {chatbotApplications.map((app, idx) => (
-            <div
+            <motion.div
               key={idx}
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
               className="bg-sky-300 rounded-lg p-4 shadow-md flex items-start gap-4 py-8"
             >
               <div className="bg-white rounded-full p-3 shadow">{app.icon}</div>
@@ -212,27 +321,34 @@ export default function HomePage() {
                 </p>
                 <a
                   href="#"
-                  className="mt-2 text-sm font-medium bg-gradient-to-r from-blue-700 to-green-500 bg-clip-text text-transparent hover:brightness-110 transition "
+                  className="mt-2 text-sm font-medium bg-gradient-to-r from-blue-700 to-green-500 bg-clip-text text-transparent hover:brightness-110 transition"
                 >
                   Tìm hiểu
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="flex lg:flex-wrap lg:justify-around gap-4 mt-12 flex-col items-center lg:flex-row  ">
+        <motion.div
+          variants={containerVariants}
+          className="flex lg:flex-wrap lg:justify-around gap-4 mt-12 flex-col items-center lg:flex-row"
+        >
           {chatbotButtons.map((btn, idx) => (
-            <a
+            <motion.a
               key={idx}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href={btn.href}
-              className="  text-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold px-10 py-4 rounded-lg shadow hover:opacity-90 transition  text-center w-[50%] lg:w-auto "
+              className="text-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold px-10 py-4 rounded-lg shadow hover:opacity-90 transition text-center w-[50%] lg:w-auto"
             >
               {btn.label} →
-            </a>
+            </motion.a>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
+      <ScrollToTopButton />
     </>
   );
 }
