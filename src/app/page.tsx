@@ -1,13 +1,53 @@
 "use client";
 
-import {
-  faAnglesDown,
-  faGraduationCap,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import BorderArrow from "@/components/border-arrow";
+import { UI } from "@/components/client-components";
+import { chatbotApplications, chatbotButtons } from "@/libs/data";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+
 import { Mail } from "lucide-react";
 import Image from "next/image";
 
+const { Card, CardContent, FontAwesomeIcon, Icons } = UI;
+
+const services = [
+  {
+    title: "Tài Chính",
+    description:
+      "Phân tích rủi ro tín dụng, dự báo thị trường, tự động hóa quy trình phê duyệt và phát hiện gian lận.",
+    icon: Icons.FileText,
+  },
+  {
+    title: "Bán lẻ",
+    description:
+      "Dự báo nhu cầu, tối ưu hóa giá cả, cá nhân hóa trải nghiệm khách hàng và quản lý kho hàng thông minh.",
+    icon: Icons.Database,
+  },
+  {
+    title: "Giáo Dục",
+    description:
+      "Học tập thích ứng, đánh giá tự động, phân tích hiệu suất học tập và hỗ trợ giảng dạy cá nhân hóa.",
+    icon: Icons.BarChart3,
+  },
+  {
+    title: "Thương Mại",
+    description:
+      "Tối ưu hóa chuỗi cung ứng, dự báo xu hướng thị trường, phân tích khách hàng và tự động hóa marketing.",
+    icon: Icons.Users,
+  },
+  {
+    title: "Du Lịch",
+    description:
+      "Gợi ý cá nhân hóa, tối ưu hóa giá phòng, dự báo nhu cầu du lịch và nâng cao trải nghiệm khách hàng.",
+    icon: Icons.Brain,
+  },
+  {
+    title: "Bất Động Sản",
+    description:
+      "Định giá tự động, phân tích thị trường, dự báo giá trị bất động sản và tối ưu hóa đầu tư.",
+    icon: Icons.Building,
+  },
+];
 export default function HomePage() {
   return (
     <>
@@ -44,7 +84,7 @@ export default function HomePage() {
                     <input
                       type="email"
                       placeholder="Email của bạn"
-                      className="bg-white text-black h-14 w-full rounded-full pl-14 pr-6 text-base shadow placeholder:text-gray-400 focus:outline-none"
+                      className="bg-white text-black h-14 w-[80%] rounded-full pl-14 pr-6 text-base shadow placeholder:text-gray-400 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -122,26 +162,75 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="relative w-full flex items-center justify-center my-6">
-          {/* Đường gạch bên trái */}
-          <div className="border-t border-dotted border-blue-200 w-full absolute left-0 top-1/2 z-0" />
-
-          {/* Icon mũi tên nằm giữa, nổi lên trên */}
-          <div className="bg-white px-4 z-10">
-            <FontAwesomeIcon icon={faAnglesDown} color="#a4c4fc" size="sm" />{" "}
-            {/* Hoặc dùng Heroicons nếu muốn: <ChevronDoubleDownIcon className="w-6 h-6 text-gray-400 animate-bounce" /> */}
-          </div>
-
-          {/* Đường gạch bên phải */}
-          {/* Không cần thêm vì đường trái đã kéo full chiều rộng. Nếu bạn cần chia cụ thể trái/phải thì xem thêm dưới */}
-        </div>
+        <BorderArrow />
       </section>
+
       <section>
         <div className="text-center">
           <p className="text-base font-semibold">
             MyGPT có thể triển khai trong
           </p>
           <p className="font-bold text-4xl mt-6 mb-10"> Các lĩnh vực</p>
+        </div>
+        <div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {services.map((service) => (
+              <Card
+                key={service.title}
+                className="text-center hover:shadow-lg transition-shadow border-none w-[80%] mx-auto  lg:w-full"
+              >
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <service.icon className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="font-bold mb-2 text-2xl">{service.title}</h3>
+                  <p className="text-lg text-gray-600">{service.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+        <BorderArrow />
+      </section>
+
+      <section className="max-w-[1140px] mx-auto my-20  ">
+        <h2 className="text-center text-green-700 text-3xl font-semibold mb-12">
+          Một số ứng dụng đã triển khai
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+          {chatbotApplications.map((app, idx) => (
+            <div
+              key={idx}
+              className="bg-sky-300 rounded-lg p-4 shadow-md flex items-start gap-4 py-8"
+            >
+              <div className="bg-white rounded-full p-3 shadow">{app.icon}</div>
+              <div>
+                <h3 className="font-bold text-blue-900 text-lg">{app.title}</h3>
+                <p className="text-red-800 text-lg mt-2 line-clamp-3">
+                  {app.description}
+                </p>
+                <a
+                  href="#"
+                  className="mt-2 text-sm font-medium bg-gradient-to-r from-blue-700 to-green-500 bg-clip-text text-transparent hover:brightness-110 transition "
+                >
+                  Tìm hiểu
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex lg:flex-wrap lg:justify-around gap-4 mt-12 flex-col items-center lg:flex-row  ">
+          {chatbotButtons.map((btn, idx) => (
+            <a
+              key={idx}
+              href={btn.href}
+              className="  text-lg bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold px-10 py-4 rounded-lg shadow hover:opacity-90 transition  text-center w-[50%] lg:w-auto "
+            >
+              {btn.label} →
+            </a>
+          ))}
         </div>
       </section>
     </>
