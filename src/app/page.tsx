@@ -4,7 +4,16 @@ import BorderArrow from "@/components/border-arrow";
 import { UI } from "@/components/client-components";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import TabVideo from "@/components/tab-videos";
-import { chatbotApplications, chatbotButtons } from "@/libs/data";
+import TrainningComponent from "@/components/trainning-component";
+import {
+  chatbotApplications,
+  chatbotButtons,
+  contentTrainning,
+  contentWhyMe,
+  groupsCreated,
+  tabsVideo,
+  tabsVideo2,
+} from "@/libs/data";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
@@ -77,31 +86,6 @@ const fadeInVariants = {
   visible: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-const tabsVideo = [
-  {
-    label: "Tư vấn sản phẩm",
-    videoId: "eXee5DUKZW0", // ← Thay bằng ID thật
-  },
-  {
-    label: "Trợ lý sản xuất",
-    videoId: "KEk8999e8Qg", // ← Thay bằng ID thật
-  },
-];
-
-const tabsVideo2 = [
-  {
-    label: "Chatbot AI và Kịch bản",
-    videoId: "eXee5DUKZW0", // ← Thay bằng ID thật
-  },
-  {
-    label: "Xây dựng dữ liệu",
-    videoId: "KEk8999e8Qg", // ← Thay bằng ID thật
-  },
-  {
-    label: "Cơ chế hoạt động",
-    videoId: "aKBxEScQlH4", // ← Thay bằng ID thật
-  },
-];
 export default function HomePage() {
   return (
     <>
@@ -435,6 +419,101 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+      <section className="bg-gradient-to-b from-[#1472da] to-[#a1c8e6] mx-auto pt-10 pb-24 ">
+        <h3 className="font-bold text-3xl mb-4 text-white text-center ">
+          Tổ chức đã và đang huấn luyện AI
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-8 gap-4 px-4 container mx-auto ">
+          {groupsCreated.map((group) => (
+            <div
+              key={group.id}
+              className="bg-white p-4 rounded-2xl rounded-tr-none rounded-br-none hover:bg-[#244479] hover:text-white"
+            >
+              <h2 className="text-amber-600 font-bold">{group.title}</h2>
+              <div className="">
+                {group.description.map((item) => (
+                  <p key={item.id} className="text-sm ">
+                    {item.content}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="mt-12">
+        <div className=" flex flex-col items-center">
+          <h2 className="font-bold text-4xl mb-4 text-center text-[#102465] ">
+            Quá trình huấn luyện
+          </h2>
+          <div className="">
+            <Image
+              src="https://mygpt.vn/wp-content/uploads/2024/06/mygpt-train-process-h.jpg"
+              alt=""
+              width={960}
+              height={407}
+              className="hidden md:block"
+            />
+            <Image
+              src="https://mygpt.vn/wp-content/uploads/2024/06/mygpt-train-process-v.jpg"
+              alt=""
+              width={419}
+              height={1007}
+              className="md:hidden"
+            />
+          </div>
+        </div>
+        <div className="lg:container mx-auto ">
+          {contentTrainning.map((item) => (
+            <TrainningComponent key={item.id} {...item} />
+          ))}
+        </div>
+      </section>
+      <section className="mt-12 ">
+        <div className="bg-[#0357c8] pt-10">
+          <h2 className="text-3xl font-bold text-white text-center">
+            Tại sao chọn chúng tôi
+          </h2>
+          <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 px-20">
+            {contentWhyMe.map((item) => (
+              <div
+                className="relative group overflow-hidden rounded-lg h-[400px] "
+                key={item.id}
+              >
+                {/* Ảnh nằm trên overlay */}
+                <Image
+                  src={item.imgageUrl}
+                  height={220}
+                  width={219}
+                  alt={item.title}
+                  className="mx-auto mt-4 relative z-10"
+                />
+
+                {/* Nền trắng đổ từ đáy lên nửa thẻ */}
+                <div className="absolute bottom-0 left-0 w-full h-2/3 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out opacity-90 z-0" />
+
+                {/* Text nằm trên overlay */}
+                <div className="relative z-10 p-6">
+                  <h3 className="text-2xl font-bold text-white group-hover:text-black text-center transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <p className="text-white mt-4 text-center group-hover:text-gray-700 transition-colors duration-300">
+                    {item.content}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div>
+            <Image
+              src="https://mygpt.vn/wp-content/uploads/2023/09/in-vector1.png"
+              alt="Group-2"
+              height={523}
+              width={1681}
+            />
+          </div>
+        </div>
+      </section>
       <ScrollToTopButton />
     </>
   );

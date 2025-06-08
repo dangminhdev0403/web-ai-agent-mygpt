@@ -1,7 +1,11 @@
 import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BorderArrow = () => {
+type BorderArrowProps = {
+  icon?: React.ReactNode;
+};
+
+const BorderArrow = ({ icon }: BorderArrowProps) => {
   return (
     <div className="relative w-full flex items-center justify-center my-6">
       {/* Đường gạch bên trái */}
@@ -9,12 +13,10 @@ const BorderArrow = () => {
 
       {/* Icon mũi tên nằm giữa, nổi lên trên */}
       <div className="bg-white px-4 z-10">
-        <FontAwesomeIcon icon={faAnglesDown} color="#a4c4fc" size="sm" />{" "}
-        {/* Hoặc dùng Heroicons nếu muốn: <ChevronDoubleDownIcon className="w-6 h-6 text-gray-400 animate-bounce" /> */}
+        {icon ?? (
+          <FontAwesomeIcon icon={faAnglesDown} color="#a4c4fc" size="sm" />
+        )}
       </div>
-
-      {/* Đường gạch bên phải */}
-      {/* Không cần thêm vì đường trái đã kéo full chiều rộng. Nếu bạn cần chia cụ thể trái/phải thì xem thêm dưới */}
     </div>
   );
 };
