@@ -3,6 +3,7 @@
 import BorderArrow from "@/components/border-arrow";
 import { UI } from "@/components/client-components";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import TabVideo from "@/components/tab-videos";
 import { chatbotApplications, chatbotButtons } from "@/libs/data";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
@@ -76,6 +77,31 @@ const fadeInVariants = {
   visible: { opacity: 1, transition: { duration: 0.8 } },
 };
 
+const tabsVideo = [
+  {
+    label: "Tư vấn sản phẩm",
+    videoId: "eXee5DUKZW0", // ← Thay bằng ID thật
+  },
+  {
+    label: "Trợ lý sản xuất",
+    videoId: "KEk8999e8Qg", // ← Thay bằng ID thật
+  },
+];
+
+const tabsVideo2 = [
+  {
+    label: "Chatbot AI và Kịch bản",
+    videoId: "eXee5DUKZW0", // ← Thay bằng ID thật
+  },
+  {
+    label: "Xây dựng dữ liệu",
+    videoId: "KEk8999e8Qg", // ← Thay bằng ID thật
+  },
+  {
+    label: "Cơ chế hoạt động",
+    videoId: "aKBxEScQlH4", // ← Thay bằng ID thật
+  },
+];
 export default function HomePage() {
   return (
     <>
@@ -347,6 +373,67 @@ export default function HomePage() {
             </motion.a>
           ))}
         </motion.div>
+
+        <div className=" flex flex-col md:flex-row mt-20 justify-center items-start gap-10 px-4">
+          {/* Cột trái: Mô tả */}
+          <div className="w-full md:w-1/3">
+            <h3 className="font-bold text-2xl mb-4 text-[#b13e30]">
+              Mẫu GenAI Chatbot tư vấn
+            </h3>
+            <div className="text-[#236c99] text-base leading-relaxed space-y-3">
+              <p>
+                Clip này được record từ màn hình hỏi đáp thực tế với Chatbot AI
+                của công ty CP bóng đèn phích nước Rạng Đông được huấn luyện
+                Giai đoạn 1 bao gồm:
+              </p>
+              <ul className="list-disc list-inside space-y-2">
+                <li>
+                  Hơn 200 sản phẩm đèn led, đèn thông minh, thiết bị điều khiển
+                  smart home;
+                </li>
+                <li>Cách sử dụng ứng dụng smart home;</li>
+                <li>Thông tin doanh nghiệp;</li>
+                <li>Chính sách bảo hành, sửa chữa; chính sách phân phối;</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Cột phải: Tabs + Video */}
+          <div className="w-full md:w-2/3">
+            <TabVideo tabs={tabsVideo} />
+          </div>
+        </div>
+        <div className=" flex flex-col md:flex-row mt-20 justify-center items-start gap-10 px-4">
+          {/* Cột trái: Mô tả */}
+          <div className="w-full md:w-1/3">
+            <h3 className="font-bold text-2xl mb-4 text-[#b13e30]">
+              Một số giải thích
+            </h3>
+            <div className="text-[#236c99] text-base leading-relaxed space-y-3">
+              <p>
+                Các video Clip ở đây sẽ giải thích nhanh giúp bạn một số câu hỏi
+                liên quan đến quá trình huấn luyện AI mà chúng tôi cung cấp đến
+                khách hàng bao gồm:
+              </p>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Phân biệt giữa Chatbot AI và Chatbot Kịch bản</li>
+                <li>
+                  Quá trình xây dựng và xử lý dữ liệu chất lượng cao dành cho
+                  huấn luyện AI
+                </li>
+                <li>
+                  {" "}
+                  Cơ chế hoạt động của ChatbotAI với các hệ thống phần mềm khác.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Cột phải: Tabs + Video */}
+          <div className="w-full md:w-2/3">
+            <TabVideo tabs={tabsVideo2} />
+          </div>
+        </div>
       </motion.section>
       <ScrollToTopButton />
     </>
