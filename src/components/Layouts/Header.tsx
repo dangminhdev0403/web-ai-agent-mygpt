@@ -1,5 +1,6 @@
 "use client";
 
+import { navHeaders } from "@/libs/data";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -39,9 +40,13 @@ const Header = () => {
       </Link>
 
       <nav className="hidden md:flex gap-6 font-bold text-base">
-        {navItems.map((label, idx) => (
-          <Link key={idx} href="#" className="hover:underline">
-            {label}
+        {navHeaders.map((item) => (
+          <Link
+            key={item.id}
+            href={item.href as string}
+            className="hover:underline"
+          >
+            {item.label}
           </Link>
         ))}
       </nav>

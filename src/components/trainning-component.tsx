@@ -1,7 +1,9 @@
+"use client";
 import BorderArrow from "@/components/border-arrow";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DOMPurify from "dompurify";
+import * as DOMPurify from "dompurify";
+
 import Image from "next/image";
 
 interface TrainningComponentProps {
@@ -40,7 +42,7 @@ const TrainningComponent = ({ ...props }: TrainningComponentProps) => {
           <div
             className="max-w-[550px]"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(props.content),
+              __html: DOMPurify.default.sanitize(props.content),
             }}
           />
         </div>

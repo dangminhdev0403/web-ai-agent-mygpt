@@ -3,6 +3,33 @@
 
 import { BookOpenCheck, MessageSquare, Users2 } from "lucide-react";
 
+export const navHeaders = [
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "LLM Dùng Riêng",
+    href: "/huan-luyen-du-lieu-dua-tren-mo-hinh-ngon-ngu-goc-dung-rieng",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "Giá Thành",
+    href: "av",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "Blog",
+    href: "aa",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "Sức Khoẻ AI",
+    href: "1221",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "About Us",
+    href: "123",
+  },
+];
 export const chatbotApplications = [
   {
     icon: <MessageSquare className="text-green-500 w-8 h-8" />,
