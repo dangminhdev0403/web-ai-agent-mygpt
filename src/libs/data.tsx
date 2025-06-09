@@ -1,5 +1,6 @@
 // client-components.tsx
 "use client";
+import { v4 as uuidv4 } from "uuid";
 
 import { BookOpenCheck, MessageSquare, Users2 } from "lucide-react";
 
@@ -12,7 +13,7 @@ export const navHeaders = [
   {
     id: (Date.now() + Math.random() + 1).toString(),
     label: "Giá Thành",
-    href: "av",
+    href: "/gia-thanh-trien-khai-va-huan-luyen",
   },
   {
     id: (Date.now() + Math.random() + 1).toString(),
@@ -305,5 +306,19 @@ export const investorCreate = [
     imageUrl: "https://mygpt.vn/wp-content/uploads/2024/07/homeid-logo.png",
     description:
       "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
+  },
+];
+export const soldAI = [
+  {
+    id: uuidv4(),
+    title: "Theo nhiệm vụ",
+    list: [
+      {
+        id: uuidv4(),
+        label: "Chatbot trực page chốt đơn",
+        description:
+          "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
+      },
+    ],
   },
 ];
