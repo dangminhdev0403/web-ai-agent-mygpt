@@ -1,14 +1,12 @@
+import { HeroSection } from "@/components/Layouts";
+
 const LMMPage = () => {
   return (
     <main className=" text-[#1a1a1a] mt-10">
-      <section className="relative z-40 text-white bg-transparent pt-20  bg-gradient-to-r from-blue-600 to-cyan-500 w-full pb-4 mb-10">
-        <h2 className="text-2xl md:text-3xl  text-center ">
-          Triển khai mô hình ngôn ngữ dùng riêng - MyGPT
-        </h2>
-        <p className="text-center text-white">
-          Triển khai mô hình ngôn ngữ lớn riêng tư, an toàn và hiệu quả
-        </p>
-      </section>
+      <HeroSection
+        title="Triển khai mô hình ngôn ngữ lớn dùng riêng - MyGPT"
+        description="Triển khai mô hình ngôn ngữ lớn dùng riêng"
+      />
       <div className="max-w-5xl mx-auto text-xl">
         <section className="mb-16 mx-auto ">
           <h3 className="text-4xl font-semibold mb-4">Thông tin</h3>

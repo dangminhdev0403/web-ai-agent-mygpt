@@ -27,7 +27,7 @@ export const navHeaders = [
   {
     id: (Date.now() + Math.random() + 1).toString(),
     label: "About Us",
-    href: "123",
+    href: "/ve-chung-toi",
   },
 ];
 export const chatbotApplications = [
@@ -275,5 +275,35 @@ export const contentWhyMe = [
     title: "Hiểu về dữ liệu",
     content:
       "Chúng tôi đã thực hiện số hoá hàng trăm triệu tài liệu và hiểu cần phải làm gì tiếp theo chứ không đơn giản chỉ phục vụ việc lưu trữ và tra cứu theo metadata và các từ khoá!",
+  },
+];
+export const investorCreate = [
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "Rạng Đông",
+    imageUrl: "https://mygpt.vn/wp-content/uploads/2024/07/rdphick-logo-56.png",
+    description:
+      "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "FUNiX",
+    imageUrl: "https://mygpt.vn/wp-content/uploads/2024/07/funix-logo.png",
+    description:
+      "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "Dauthau.INFO",
+    imageUrl: "https://mygpt.vn/wp-content/uploads/2024/07/logo-chat-55.png",
+    description:
+      "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
+  },
+  {
+    id: (Date.now() + Math.random() + 1).toString(),
+    label: "HomeID",
+    imageUrl: "https://mygpt.vn/wp-content/uploads/2024/07/homeid-logo.png",
+    description:
+      "Chatbot tư vấn sản xuất; Chatbot kế hoạch tại nhà máy bình phích thuỷ tinh",
   },
 ];
