@@ -22,8 +22,8 @@ export const navHeaders = [
   },
   {
     id: (Date.now() + Math.random() + 1).toString(),
-    label: "Sức Khoẻ AI",
-    href: "1221",
+    label: "Chat Đặt Xe",
+    href: "chat-dat-xe",
   },
   {
     id: (Date.now() + Math.random() + 1).toString(),

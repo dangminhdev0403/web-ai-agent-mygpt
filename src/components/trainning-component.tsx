@@ -2,7 +2,7 @@
 import BorderArrow from "@/components/border-arrow";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 import Image from "next/image";
 
@@ -42,7 +42,7 @@ const TrainningComponent = ({ ...props }: TrainningComponentProps) => {
           <div
             className="max-w-[550px]"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.default.sanitize(props.content),
+              __html: DOMPurify.sanitize(props.content),
             }}
           />
         </div>
