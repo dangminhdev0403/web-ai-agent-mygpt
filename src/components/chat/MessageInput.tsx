@@ -3,6 +3,7 @@
 import { Send } from "lucide-react";
 import { useRef, useState, type KeyboardEvent } from "react";
 
+import { useSocket } from "@/hooks/useSocket";
 import TextField from "@mui/material/TextField";
 
 interface MessageInputProps {
@@ -18,14 +19,24 @@ export function MessageInput({
 }: MessageInputProps) {
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLDivElement | null>(null);
+  const { sendMessage } = useSocket();
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (message.trim() && !disabled) {
       onSendMessage(message.trim());
+      sendMessage(message.trim());
+
       setMessage("");
     }
   };
 
+  /*************  ✨ Windsurf Command ⭐  *************/
+  /**
+   * Handles key press events in the message input area.
+   * If the pressed key is Enter and it's not a Shift + Enter, sends the message.
+   * @param {KeyboardEvent<HTMLDivElement>} e - The key press event.
+   */
+  /*******  84fdb165-3080-4160-bf9d-d996b22f0481  *******/
   const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();

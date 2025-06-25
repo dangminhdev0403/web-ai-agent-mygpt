@@ -1,5 +1,6 @@
 "use client";
 
+import { getHistory, sendChatBox } from "@/app/actions/chat.action";
 import { ChatContact, Message } from "@/utils/types/chat";
 import { useCallback, useState } from "react";
 
@@ -8,7 +9,7 @@ export function useChat() {
     {
       id: "welcome",
       content:
-        "Xin chào! Tôi là AI Assistant. Tôi có thể giúp bạn trả lời câu hỏi, hỗ trợ công việc, hoặc chỉ đơn giản là trò chuyện. Bạn cần hỗ trợ gì hôm nay?",
+        "Xin chào! Tôi là Trợ lí Đặt Xe Rẻ. Tôi có thể giúp bạn trả lời câu hỏi, hỗ trợ công việc, hoặc chỉ đơn giản là trò chuyện. Bạn cần hỗ trợ gì hôm nay?",
       sender: "bot",
       timestamp: new Date(Date.now() - 300000),
       status: "read",
@@ -19,51 +20,14 @@ export function useChat() {
   const [contacts] = useState<ChatContact[]>([
     {
       id: "1",
-      name: "AI Assistant",
+      name: "Trợ lí Đặt Xe Rẻ",
       avatar: "🤖",
       status: "online",
-      lastMessage: "Xin chào! Tôi là AI Assistant...",
+      lastMessage: "Xin chào! Tôi là Trợ lí Đặt Xe Rẻ...",
       lastMessageTime: new Date(Date.now() - 300000),
       unreadCount: 0,
     },
-    {
-      id: "2",
-      name: "Support Team",
-      avatar: "👥",
-      status: "online",
-      lastMessage: "Cảm ơn bạn đã liên hệ với chúng tôi",
-      lastMessageTime: new Date(Date.now() - 3600000),
-      unreadCount: 2,
-    },
-    {
-      id: "3",
-      name: "Sales Department",
-      avatar: "💼",
-      status: "away",
-      lastMessage: "Chúng tôi sẽ liên hệ lại với bạn sớm nhất",
-      lastMessageTime: new Date(Date.now() - 7200000),
-      unreadCount: 0,
-    },
-    {
-      id: "4",
-      name: "Technical Support",
-      avatar: "🔧",
-      status: "busy",
-      lastMessage: "Vấn đề của bạn đã được ghi nhận",
-      lastMessageTime: new Date(Date.now() - 86400000),
-      unreadCount: 1,
-    },
   ]);
-
-  const botResponses = [
-    "Cảm ơn bạn đã nhắn tin! Tôi đã hiểu câu hỏi của bạn và sẽ cố gắng trả lời một cách chi tiết nhất có thể.",
-    "Đó là một câu hỏi rất thú vị! Dựa trên kinh nghiệm và kiến thức của tôi, tôi có thể đưa ra một số gợi ý hữu ích cho bạn.",
-    "Tôi hiểu vấn đề bạn đang gặp phải. Hãy để tôi phân tích tình huống và đưa ra giải pháp phù hợp nhất.",
-    "Rất vui được hỗ trợ bạn! Bạn có thể chia sẻ thêm chi tiết cụ thể để tôi có thể tư vấn chính xác hơn không?",
-    "Dựa trên thông tin bạn cung cấp, tôi nghĩ có một số cách tiếp cận khác nhau mà chúng ta có thể thử nghiệm.",
-    "Đây là một chủ đề khá phức tạp. Tôi sẽ cố gắng giải thích một cách đơn giản và dễ hiểu nhất.",
-    "Tôi có thể giúp bạn với vấn đề này. Trước tiên, hãy cùng tôi xem xét các yếu tố quan trọng.",
-  ];
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim()) return;
@@ -100,15 +64,13 @@ export function useChat() {
 
     // Show typing indicator
     setIsTyping(true);
+    const res = await sendChatBox(content);
 
     // Simulate bot response
     setTimeout(() => {
-      const randomResponse =
-        botResponses[Math.floor(Math.random() * botResponses.length)];
-
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: randomResponse,
+        content: res?.answer,
         sender: "bot",
         timestamp: new Date(),
         status: "delivered",
@@ -129,11 +91,28 @@ export function useChat() {
       }, 1000);
     }, 1500 + Math.random() * 2000);
   }, []);
+  const getHistoryChat = useCallback(async () => {
+    const history = await getHistory();
+
+    const formatted: Message[] = history.map((msg, idx) => ({
+      id: `${msg.timestamp}-${idx}`, // đảm bảo unique id
+      content: msg.content,
+      sender: msg.sender,
+      timestamp: new Date(msg.timestamp * 1000), // convert UNIX to Date
+      status: "read", // vì là tin cũ nên đánh dấu đã đọc
+    }));
+
+    setMessages((prev) => [
+      ...prev.filter((m) => m.id === "welcome"), // giữ welcome nếu muốn
+      ...formatted,
+    ]);
+  }, []);
 
   return {
     messages,
     contacts,
     isTyping,
     sendMessage,
+    getHistoryChat,
   };
 }
