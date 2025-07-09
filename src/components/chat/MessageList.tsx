@@ -12,6 +12,7 @@ interface MessageListProps {
 
 export function MessageList({ messages, isTyping }: MessageListProps) {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
@@ -57,7 +58,7 @@ export function MessageList({ messages, isTyping }: MessageListProps) {
   };
 
   return (
-    <ScrollArea ref={scrollAreaRef} className="flex-1 p-6">
+    <ScrollArea ref={scrollAreaRef} className="flex-1 p-6 h-full">
       <div className="space-y-6">
         {messages.map((message, index) => {
           const showAvatar =
@@ -171,6 +172,7 @@ export function MessageList({ messages, isTyping }: MessageListProps) {
             </div>
           </div>
         )}
+        <div ref={bottomRef} />
       </div>
     </ScrollArea>
   );

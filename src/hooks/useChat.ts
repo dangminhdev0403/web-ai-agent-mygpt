@@ -9,7 +9,7 @@ export function useChat() {
     {
       id: "welcome",
       content:
-        "Xin chào! Tôi là Trợ lí Đặt Xe Rẻ. Tôi có thể giúp bạn trả lời câu hỏi, hỗ trợ công việc, hoặc chỉ đơn giản là trò chuyện. Bạn cần hỗ trợ gì hôm nay?",
+        '🚗 Xin chào! Em là Trợ lí Đặt Xe Rẻ – hỗ trợ đặt xe sân bay giá tốt.\n\nEm có thể giúp mình:\n• Tìm xe, báo giá\n• Đặt chuyến nhanh\n• Tra thông tin tuyến, loại xe\n\n📌 Mình có thể thử nhắn:\n- "Danh sách xe"\n- "Danh sách tuyến"\n- "Đặt xe 4 chỗ từ sân bay Tân Sơn Nhất về TP.HCM lúc 9h sáng mai"\n\n💬 Anh/chị cần hỗ trợ gì ạ?',
       sender: "bot",
       timestamp: new Date(Date.now() - 300000),
       status: "read",
